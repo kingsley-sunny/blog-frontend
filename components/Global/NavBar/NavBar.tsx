@@ -2,11 +2,17 @@
 
 import { useState } from "react";
 import { Link } from "react-daisyui";
-import { HiMenu, HiOutlineX } from "react-icons/hi";
+import { HiMenu, HiMoon, HiOutlineX, HiSun } from "react-icons/hi";
 import Container from "../Container";
 import ProfileImage from "../ProfileImage";
 
-const NavBar = () => {
+const NavBar = ({
+  setDarkTheme,
+  isDarkTheme,
+}: {
+  setDarkTheme: (val: any) => any;
+  isDarkTheme: boolean;
+}) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const toggleNav = () => {
@@ -15,6 +21,14 @@ const NavBar = () => {
       return;
     }
     setIsNavOpen(true);
+  };
+
+  const toggleDarkTheme = () => {
+    if (isDarkTheme) {
+      setDarkTheme(false);
+      return;
+    }
+    setDarkTheme(true);
   };
 
   return (
@@ -48,13 +62,19 @@ const NavBar = () => {
               </Link>
             </div>
 
+            {isDarkTheme ? (
+              <HiSun onClick={toggleDarkTheme} className='w-6 h-6 cursor-pointer' />
+            ) : (
+              <HiMoon onClick={toggleDarkTheme} className='w-6 h-6 cursor-pointer' />
+            )}
+
             <ProfileImage />
 
             {/* Menu icon for mobile screens */}
             {isNavOpen ? (
-              <HiOutlineX onClick={toggleNav} className='w-6 h-6 lg:hidden' />
+              <HiOutlineX onClick={toggleNav} className='w-6 h-6 lg:hidden c' />
             ) : (
-              <HiMenu onClick={toggleNav} className='w-6 h-6 lg:hidden' />
+              <HiMenu onClick={toggleNav} className='w-6 h-6 lg:hidden cursor-pointer' />
             )}
           </div>
         </Container>
