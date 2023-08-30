@@ -26,14 +26,17 @@ const NavBar = ({
   const toggleDarkTheme = () => {
     if (isDarkTheme) {
       setDarkTheme(false);
+      localStorage.setItem("blog-theme", "light");
+
       return;
     }
     setDarkTheme(true);
+    localStorage.setItem("blog-theme", "dark");
   };
 
   return (
-    <nav className='relative'>
-      <div className='shadow-md border-b-gray-400'>
+    <nav className='sticky top-0 z-50 bg-base-100'>
+      <div className='shadow-md border-b-gray-400 sticky top-0'>
         <Container className='flex justify-between items-center py-4'>
           <h2 className='text-xl lg:text-2xl font-bold uppercase'>Blog app</h2>
 
@@ -81,7 +84,7 @@ const NavBar = ({
       </div>
 
       {isNavOpen ? (
-        <div className='absolute w-full bg-base-100 pb-8 lg:hidden'>
+        <div className='absolute z-50 w-full bg-base-100 pb-8 lg:hidden'>
           <div className='lg:block'>
             <Link className='block py-3 px-6 border-b border-b-base-300' href={"/"}>
               Home
