@@ -1,8 +1,11 @@
 "use client";
 
+import { useAtom } from "jotai";
 import { useState } from "react";
 import { Link } from "react-daisyui";
 import { HiMenu, HiMoon, HiOutlineX, HiSun } from "react-icons/hi";
+import { loginModalAtom, signupModalAtom } from "../../../app/store";
+import Button from "../Button";
 import Container from "../Container";
 import ProfileImage from "../ProfileImage";
 
@@ -14,6 +17,8 @@ const NavBar = ({
   isDarkTheme: boolean;
 }) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isLoginModalShown, setIsLoginModalShown] = useAtom(loginModalAtom);
+  const [isSignupModalOpen, setIsSignupModalOpen] = useAtom(signupModalAtom);
 
   const toggleNav = () => {
     if (isNavOpen) {
@@ -51,18 +56,18 @@ const NavBar = ({
           <div className='flex space-x-4 items-center lg:space-x-8'>
             {/* hidden for small screens */}
             <div className='hidden lg:flex space-x-6'>
-              <Link
-                href={"/auth/signin"}
-                className='rounded-lg px-4 py-2 font-bold text-primary block text-sm border border-primary'
+              <Button
+                onClick={() => setIsLoginModalShown(true)}
+                className='rounded-lg px-4 font-bold text-primary block text-sm border border-primary'
               >
                 Login
-              </Link>
-              <Link
-                href={"/auth/signup"}
-                className='rounded-lg text-white font-bold px-4 py-2 text-sm btn-primary'
+              </Button>
+              <Button
+                onClick={() => setIsSignupModalOpen(true)}
+                className='rounded-lg text-white font-bold px-4 text-sm btn-primary'
               >
                 Sign Up
-              </Link>
+              </Button>
             </div>
 
             {isDarkTheme ? (
@@ -101,14 +106,15 @@ const NavBar = ({
           </div>
 
           <div className='flex px-6 space-x-6 mt-6'>
-            <Link
-              href={"/auth/signin"}
+            <Button
+              onClick={() => setIsLoginModalShown(true)}
               className='rounded-lg px-4 py-2 font-bold text-primary block text-sm border border-primary'
             >
               Login
-            </Link>
+            </Button>
             <Link
               href={"/auth/signup"}
+              onClick={() => setIsSignupModalOpen(true)}
               className='rounded-lg text-white font-bold px-4 py-2 text-sm btn-primary'
             >
               Sign Up

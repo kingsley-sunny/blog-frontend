@@ -2,7 +2,7 @@ import Container from "../Container";
 
 const Footer = () => {
   return (
-    <div className='bg-base-200 mt-16'>
+    <div className='bg-base-200 mt-16 text-sm'>
       <Container className='py-12 text-center text-gray-500'>
         <p className=''>
           Copyright ©2023 All rights reserved | This template is made with by EKC SUNNY
